@@ -1,6 +1,12 @@
-# Heading 1
-## Heading 2
-### Heading 3
+# Compressor Design
+Marc Martinez and Benjamin Tollison
+## Design Parameters
+<div style="text-align: center;">
+<img src="appendix/Compressor-design-parameters.png" alt="Design Constraints" width="50%">
+</div>
 
-$$f = f(x)$$
-The quick brown fox
+## Annulus Dimensions
+
+## Mean Velocity Triangles
+
+## Variation of air angles root to tip
