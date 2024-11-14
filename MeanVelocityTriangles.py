@@ -44,6 +44,26 @@ def PlotGeometry():
     return None
 
 
+def PlotDegOfReact():
+    x = np.linspace(0, 1)
+    plt.plot(x, DegOfReaction(x))
+    plt.title("Degree of Reaction")
+    plt.xlabel(r"$\frac{x}{L}$")
+    plt.ylabel(r"$\Lambda$")
+    plt.show()
+    return None
+
+
+def PlotWorkDone():
+    x = np.linspace(0, 1)
+    plt.plot(x, WorkDone(x))
+    plt.title("Work Done")
+    plt.xlabel(r"$\frac{x}{L}$")
+    plt.ylabel(r"$\lambda$")
+    plt.show()
+    return None
+
+
 def MeanRadius(normalized_length: float) -> float:
     x, hub_radii = HubRadius(
         radius_hub_inlet=annulus_dimensions["inlet_radii"][0],
@@ -115,8 +135,8 @@ degree_of_reaction = 1 - (whirl_velocity_2 + whirl_velocity_1) / (2 * axial_velo
 
 # Formatting to solve all stages
 def DegOfReaction(normalized_length: float) -> float:
-    inital_value = 0.6
-    final_value = 0.5
+    inital_value = 0.639
+    final_value = 0.4
     k = 5
     exponential_model = final_value - (final_value - inital_value) * np.exp(
         -k * normalized_length
@@ -187,11 +207,10 @@ for length in normalized_location_of_stages:
 
 if __name__ == "__main__":
     import pandas as pd
+    import IPython.display
 
-    # PlotGeometry()
-    # x = np.linspace(0, 1)
-    # plt.plot(x, DegOfReaction(x))
-    # plt.show()
-    # print(velocity_triangles_table)
+    PlotGeometry()
+    PlotDegOfReact()
+    PlotWorkDone()
     velocity_triangles_df = pd.DataFrame(velocity_triangles_table)
-    # velocity_triangles_df.to_markdown("README.md")  # , escape=False)
+    print(velocity_triangles_df)
