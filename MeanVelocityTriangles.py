@@ -135,7 +135,7 @@ degree_of_reaction = 1 - (whirl_velocity_2 + whirl_velocity_1) / (2 * axial_velo
 
 # Formatting to solve all stages
 def DegOfReaction(normalized_length: float) -> float:
-    inital_value = 0.6
+    inital_value = 0.639
     final_value = 0.4
     k = 5
     exponential_model = final_value - (final_value - inital_value) * np.exp(
