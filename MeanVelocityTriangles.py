@@ -32,7 +32,6 @@ def PlotGeometry():
     )
     tip_radii = [annulus_dimensions["inlet_radii"][-1] for i in range(len(hub_radii))]
     mean_radii = (np.array(hub_radii) + np.array(tip_radii)) / 2
-    # Unit test
     plt.plot(x, hub_radii)
     plt.plot(x, tip_radii)
     plt.plot(x, mean_radii, linestyle="--")

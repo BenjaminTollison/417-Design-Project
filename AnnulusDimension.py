@@ -1,6 +1,5 @@
 import numpy as np
 from DesignConstants import *
-from MachFromArea import Householder
 
 AreaRatioFromMach = lambda mach, gamma: (1 / mach) * (
     (2 / (gamma + 1)) * (1 + ((gamma - 1) * mach**2) / 2)

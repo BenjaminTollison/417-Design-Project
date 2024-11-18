@@ -58,7 +58,6 @@ def PlotAnglesAtCertainPosition(normalized_length: float):
     plt.xlabel("Radius from root to tip")
     plt.ylabel("Degrees")
     plt.xlim(r_values[0], r_values[-1])
-    # plt.ylim(0,120)
     plt.show()
 
 
