@@ -98,18 +98,18 @@ The example given to already has the number of stages and rotation speed given t
 # Annulus Dimensions
 The first step is going to contrain the cross sectional inlet by the mach number and the hub-tip-ratio by conservation of mass.
 
-$$
+```math
 \dot{m}_{in} = \dot{m}_{out} = \rho_{in} v_{in} \sigma_{in} 
-$$
+```
 
 First to find $\rho_{in}$ with ideal gas assumption
-$$
+```math
 \rho_{in} = \frac{P_{01}}{R_{air}T_{01}}
-$$
+```
 Then we can use the equations in the example to find the outer radius:
-$$
+```math
 m = \rho_1 \sigma C_{al} = \rho_1 \pi r_i^2 \left[ 1 - \left( \frac{r_r}{r_t} \right)^2 \right] C_a
-$$
+```
 
 $$
 C_a = M_{in} \sqrt{\gamma R T_{01}}
@@ -254,7 +254,7 @@ c_a \tan
 ```math
 \frac{V_{i+1}}{V_i} = \frac{\cos \alpha_i}{\cos \alpha_{i+1}} = \text{de Haller}
 ```
-
+You may have noticed that $\alpha_1$ is now going to be a function of $\Lambda,\lambda$ which is intentional because after trying to hard code the angle of attack to be zero, flow seperation would happen. Because of python indexing the first stage starts at 0 and counts up to 4. Running this system of equations along the normalized x at equally spaced points produces the following. 
 
 |    |   $\lambda$ |   $\Lambda$ |   $ \beta_1 $ |   $ \beta_2 $ |   $ \alpha_1 $ |   $ \alpha_2 $ |   $C_{w1}$ |   $C_{w2}$ |   de Haller |   $P_{0S}$ |   $T_{0S}$ |
 |---:|------------:|------------:|--------------:|--------------:|---------------:|---------------:|-----------:|-----------:|------------:|-----------:|-----------:|
@@ -264,5 +264,48 @@ c_a \tan
 |  3 |      0.8479 |      0.4056 |        56.126 |        80.926 |         28.593 |         56.739 |     92.732 |    259.389 |      1.601  |     4.2343 |     454.75 |
 |  4 |      0.833  |      0.4016 |        55.616 |        82.309 |         30.322 |         57.265 |     99.506 |    264.649 |      1.5963 |     5.5705 |     496.4  |
 
-
 # Variation of air angles root to tip
+
+Now an interesting consequence happens when we fix the degree of reaction and work done per stage and allowing that to determind the angle shapes. At each non-dimensional x we can run the system of equations for different $U_T=U_T(r) \epsilon [r_{hub}(x),r_{tip}=cont.]$ Which produces the following graphs.
+
+<div style="text-align: center;">
+<img src="appendix/Stage 1 variation.png" alt="Geometry" width="80%">
+</div>
+
+<div style="text-align: center;">
+<img src="appendix/Stage 2 variation.png" alt="Geometry" width="80%">
+</div>
+
+<div style="text-align: center;">
+<img src="appendix/Stage 3 variation.png" alt="Geometry" width="80%">
+</div>
+
+<div style="text-align: center;">
+<img src="appendix/Stage 4 variation.png" alt="Geometry" width="80%">
+</div>
+
+<div style="text-align: center;">
+<img src="appendix/Stage 5 variation.png" alt="Geometry" width="80%">
+</div>
+
+There are fairly dramatic angles in order to satisfy the work done and degree of reaction functions. After tuning these functions these were the best results that we found.
+
+## Free vortex condition
+
+We will now vary the air angles from root to tip by taking into account the various distributions of the whirl velocity with radius. For this design we will use the Free Vortex constraint For the first stage, the design choice is limited due to the lack of inlet guide vanes (IGVs), resulting in no whirl component as the airflow enters the compressor. Consequently, the inlet velocity remains uniform across the annular area. In subsequent stages, the whirl velocity as the airflow enters the rotor blades is influenced by the axial velocity and the outlet angle from the previous stage's stator. The allows greater flexibility in the aerodynamic design for these stages. For this design we will use a Free Vortex approach to analyze the first stage with the condition $V_U = $ constant holding true when $V_U = 0$ The focus will then shift to designing the third stage, taking into account that the mean radius design assumed $\Lambda_{mean} = 0.50$
+
+To determine the air angles, it's necessary to assess the radial variation of $V_U$. Under the free vortex condition, $V_U*r =$ constant, with the value of $V_U$ previously established in the mean design calculation
+
+### Note that the change in notation
+$$ \beta_1 = \text{first stator angle}$$
+$$ \beta_{1.5} = \text{second stator angle}$$
+$$ \alpha_{1} = \text{angle of attack of the stator}$$
+$$ \alpha_{1.5} = \text{angle of attack leaving the stator}$$
+$$ \alpha_{2} = 0 \rightarrow V_2 = C_a$$
+<div style="text-align: center;">
+<img src="appendix/FreeVortexVariation.png" alt="Geometry" width="100%">
+</div>
+
+### Comparison
+
+Both methods for finding the angles do result in serve turning angles of the flow that can lead to flow seperation in manuevers. To not have to manufacture the more twisted airfoils, we selected that using the Free Vortex solution is the better option. 

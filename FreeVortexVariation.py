@@ -156,5 +156,19 @@ axs[4].plot(r_15_vals[4], alpha_15_vals[4], label=r"$\alpha_{1.5}$")
 axs[4].plot(r_1_vals[3], alpha_1_vals[4], label=r"$\alpha_{1}$")
 axs[4].set_title("Stage 5 angles")
 axs[4].legend()
-
 plt.show()
+
+# def DegOfReaction(radius):
+# return 1 - (1/radius**2)*(1 - 0.5)
+
+# radius_hub_inlet=annulus_dimensions["inlet_radii"][0],
+# radius_hub_outlet=annulus_dimensions["outlet_radii"][0],
+# plt.plot(
+# np.linspace(annulus_dimensions["inlet_radii"][0],annulus_dimensions["inlet_radii"][-1]),
+# [DegOfReaction(r) for r in np.linspace(annulus_dimensions["inlet_radii"][0],annulus_dimensions["inlet_radii"][-1])],
+# label=r'$\Lambda$'
+# )
+# plt.title('Degree of Reaction')
+# plt.xlabel('Radius')
+# plt.ylabel(r'$\Lambda$')
+# plt.show()
