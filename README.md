@@ -98,10 +98,14 @@ The example given to already has the number of stages and rotation speed given t
 # Annulus Dimensions
 The first step is going to contrain the cross sectional inlet by the mach number and the hub-tip-ratio by conservation of mass.
 
-$$\dot{m}_{in} = \dot{m}_{out} = \rho_{in} v_{in} \sigma_{in} $$
+$$
+\dot{m}_{in} = \dot{m}_{out} = \rho_{in} v_{in} \sigma_{in} 
+$$
 
 First to find $\rho_{in}$ with ideal gas assumption
-$$\rho_{in} = \frac{P_{01}}{R_{air}T_{01}}$$
+$$
+\rho_{in} = \frac{P_{01}}{R_{air}T_{01}}
+$$
 Then we can use the equations in the example to find the outer radius:
 $$
 m = \rho_1 \sigma C_{al} = \rho_1 \pi r_i^2 \left[ 1 - \left( \frac{r_r}{r_t} \right)^2 \right] C_a
@@ -177,66 +181,79 @@ That means that we need to define $\Lambda = \Lambda(x)$ and $\lambda = \lambda(
 </div>
 
 Now that those are defined as what can by call the design hyperparameters by turning the inlet, outlet, and scaling factors manually into the following system of equations scheme. Note that the de Haller criteria is what we used to verify if the angles prevent flow seperation. $\frac{V_2}{V_1} \geq 0.72$
+```math
 
-1. 
-   $$
-   b_1 = \frac{c_p \Delta T_{0s}}{\chi(x) \, U(x) \, C_a}, \quad b_2 = \frac{2 L(x) \, U(x,r)}{C_a}
-   $$
+b_1 = \frac{c_p \Delta T_{os}}{x(x) U(x) c_a}, \quad b_2 = \frac{2 \Delta(x) U(x,x)}{c_a}
+```
 
-2. 
-   $$
-   \begin{pmatrix}
-   \tan \beta \\ \tan \beta_2
-   \end{pmatrix}
-   =
-   \begin{pmatrix}
-   1 & -1 \\ 1 & 1
-   \end{pmatrix}^{-1}
-   \begin{pmatrix}
-   b_1 \\ b_2
-   \end{pmatrix}
-   $$
+```math
+\begin{bmatrix}
+\tan \beta_1 \\
+\tan \beta_2
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & -1 \\
+1 & 1
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+b_1 \\
+b_2
+\end{bmatrix}
+```
 
-3. 
-   $$
-   \begin{pmatrix}
-   \beta \\ \beta_2
-   \end{pmatrix}
-   =
-   \tan^{-1} \left(
-   \begin{pmatrix}
-   1 & -1 \\ 1 & 1
-   \end{pmatrix}^{-1}
-   \begin{pmatrix}
-   b_1 \\ b_2
-   \end{pmatrix}
-   \right)
-   $$
+```math
+\begin{bmatrix}
+\beta_1 \\
+\beta_2
+\end{bmatrix}
+=
+\tan^{-1}
+\left(
+\begin{bmatrix}
+1 & -1 \\
+1 & 1
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+b_1 \\
+b_2
+\end{bmatrix}
+\right)
+```
 
-4. 
-   $$
-   \begin{pmatrix}
-   \alpha \\ \alpha_2
-   \end{pmatrix}
-   =
-   \tan^{-1} \left( \frac{U}{C_a} \right) - \tan^{-1} \left( \frac{\beta}{\beta_2} \right)
-   $$
+```math
+\begin{pmatrix}
+\alpha_1 \\
+\alpha_2
+\end{pmatrix}
+=
+\tan^{-1}
+\left(
+\frac{U}{c_a}
+- \tan
+\begin{pmatrix}
+\beta_1 \\
+\beta_2
+\end{pmatrix}
+\right)
+```
 
-5. 
-   $$
-   \begin{pmatrix}
-   cw_1 \\ cw_2
-   \end{pmatrix}
-   =
-   C_a \tan \begin{pmatrix}
-   \alpha \\ \alpha_2
-   \end{pmatrix}
-   $$
+```math
+\begin{pmatrix}
+c_{w1} \\
+c_{w2}
+\end{pmatrix}
+=
+c_a \tan
+\begin{pmatrix}
+\alpha_1 \\
+\alpha_2
+\end{pmatrix}
+```
 
-6. 
-   $$
-   \frac{V_{i+1}}{V_i} = \frac{\cos \alpha_i}{\cos \alpha_{i+1}} \quad \text{(de Haller)}
-   $$
+```math
+\frac{V_{i+1}}{V_i} = \frac{\cos \alpha_i}{\cos \alpha_{i+1}} = \text{de Haller}
+```
 
 
 |    |   $\lambda$ |   $\Lambda$ |   $ \beta_1 $ |   $ \beta_2 $ |   $ \alpha_1 $ |   $ \alpha_2 $ |   $C_{w1}$ |   $C_{w2}$ |   de Haller |   $P_{0S}$ |   $T_{0S}$ |
