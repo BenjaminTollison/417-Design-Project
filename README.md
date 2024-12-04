@@ -1,16 +1,51 @@
 # Compressor Design
 Marc Martinez and Benjamin Tollison
-### Table of Contents
-1. [Design Parameters](#design-parameters)
-2. [Annulus Dimensions](#annulus-dimensions)
-3. [Mean Velocity Triangles](#mean-velocity-triangles)
-4. [Variation of Air Angles Root to Tip](#variation-of-air-angles-root-to-tip)
-# How to run the scripts(Optional)
+## To-Do List
+### Compressor
+1. [x] Find the compressor annulus
+2. [x] Defind the geometry of the COD
+3. [x] Solve the variation of angles with system of equations
+4. [x] Solve vartion of angles with Free vortex condition
+5. [ ] Explore compressiblity effects
+6. [ ] Explore off-design preformance
+7. [x] Write the report
+
+### Turbine
+1. [ ] Define the turbine annulus
+2. [ ] Use temperature drop, flow coefficient, and outlet kinectic energy
+3. [ ] consider 3D effects, blade shapes, and new outlet kinectic energy
+4. [ ] Satisfy the free vortex condition
+5. [ ] Internal losses, blade pitch, and cord
+6. [ ] Estimation of stage performance
+7. [ ] Design point preformance
+8. [ ] Complete the report by Thursday Night
+# Table of Contents
+- [Setup](#setup)
+- [Compressor](#compressor)
+  - [Design Parameters](#design-parameters)
+  - [Annulus Dimensions](#annulus-dimensions)
+  - [Mean Velocity Triangles](#mean-velocity-triangles)
+  - [Variation of Air Angles Root to Tip](#variation-of-air-angles-root-to-tip)
+- [Turbine](#turbine)
+# Setup
+## Grading Purposes Python script
+This script was created to automate the process of creating the temporary python environment and not have to constantly reference this document. All of the setup process is handled by the 'GradingPurposes.py' script that will prompt you in the terminal after you clone the git repository or download the files. Just run the following command to get started:
+
+```bash
+python3 GradingPurposes.py --setup
+```
+or run 
+
+```powershell
+py GradingPurposes.py --setup
+```
+
 ## Cloning a Git Repository using PowerShell
 
 Follow the steps below to clone the repository `https://github.com/BenjaminTollison/417-Design-Project.git` using PowerShell.
 
-### Prerequisites (Windows)
+### Manual Setup Process
+#### (Note that the GPyOpt package is note neccessary currently)
 
 Ensure that you have Git installed on your system. You can verify this by running the following command:
 
@@ -83,8 +118,8 @@ deactivate
 ```
 Then using a file explorer right click and delete the folder. (Windows doesn't like to remove directories from the command line that aren't empty)
 
-
-# Design Parameters
+# Compressor
+## Design Parameters
 The items that we will explore are the following:
 + choice of rotational speed and annulus dimensions;
 + determination of number of stages, using an assumed efficiency;
@@ -309,3 +344,4 @@ $$ \alpha_{2} = 0 \rightarrow V_2 = C_a$$
 ### Comparison
 
 Both methods for finding the angles do result in serve turning angles of the flow that can lead to flow seperation in manuevers. To not have to manufacture the more twisted airfoils, we selected that using the Free Vortex solution is the better option. 
+# Turbine
