@@ -1,7 +1,7 @@
 # Compressor Design
 Marc Martinez and Benjamin Tollison
 ## To-Do List
-### Compressor
+### Compressor to do
 1. [x] Find the compressor annulus
 2. [x] Defind the geometry of the COD
 3. [x] Solve the variation of angles with system of equations
@@ -10,7 +10,7 @@ Marc Martinez and Benjamin Tollison
 6. [ ] Explore off-design preformance
 7. [x] Write the report
 
-### Turbine
+### Turbine to do
 1. [ ] Define the turbine annulus
 2. [ ] Use temperature drop, flow coefficient, and outlet kinectic energy
 3. [ ] consider 3D effects, blade shapes, and new outlet kinectic energy
