@@ -43,7 +43,7 @@ def CreateVenv(venv_dir="design_env"):
     print(f"    {activation_command}\n")
     # Prompt the user to confirm activation
     print(
-        "After activating the virtual environment, rerun this script with the 'python3 GradingPurposes.py --compressor' option to proceed OR '--turbine'"
+        "After activating the virtual environment, rerun this script with the 'python3 GradingPurposes.py --setup-pip'"
     )
     sys.exit(0)  # Exit after providing instructions
 
@@ -100,7 +100,12 @@ def main():
         description="Run tasks with a virtual environment."
     )
     parser.add_argument(
-        "--setup",
+        "--setup-env",
+        action="store_true",
+        help="Create the virtual environment and prompt user to install the required packages if required.",
+    )
+    parser.add_argument(
+        "--setup-pip",
         action="store_true",
         help="Create the virtual environment and prompt user to install the required packages if required.",
     )
@@ -121,18 +126,20 @@ def main():
     )
     args = parser.parse_args()
 
-    if args.setup:
+    if args.setup_env:
         CreateVenv()  # Create the virtual environment and exit
-    elif args.compressor:
+    elif args.setup_pip:
         InstallRequiredPackages()  # Install required packages
+    elif args.compressor:
         return NotImplementedError
     elif args.turbine:
-        InstallRequiredPackages()  # Install required packages
         return NotImplementedError
     elif args.delete_temp:
         DeleteTempVenv()  # Delete the virtual environment
     else:
-        print("Usage: python GradingPurposes.py --setup")
+        print("Usage: python GradingPurposes.py --setup-env")
+        print("OR")
+        print("Usage: python GradingPurposes.py --setup-pip")
         print("OR")
         print("python GradingPurposes.py --compressor")
         print("OR")

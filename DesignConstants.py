@@ -1,3 +1,4 @@
+### Compressor
 mass_flow_rate = 8.10  # kg/s
 compressor_pressure_ratio = 5.0
 maximum_cycle_temperature = 1173.0  # K
@@ -18,3 +19,10 @@ number_of_stages = 5
 rotational_speed = 25650  # rpm
 inlet_hub_tip_ratio = 0.4
 axial_channel = "COD"
+
+
+### Turbine
+turbine_pressure_ratio = 2.16
+turbine_efficiency = 0.88
+turbine_power = 1.7e6  # W
+rotor_tip_clearance = 0.01  # percent of blade height
