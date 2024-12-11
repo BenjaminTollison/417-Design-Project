@@ -1,9 +1,9 @@
-import subprocess
-import sys
+import argparse
 import os
 import shutil
 import stat
-import argparse
+import subprocess
+import sys
 
 
 def CreateVenv(venv_dir="design_env"):
@@ -131,8 +131,10 @@ def main():
     elif args.setup_pip:
         InstallRequiredPackages()  # Install required packages
     elif args.compressor:
+        print("NotImplementedError")
         return NotImplementedError
     elif args.turbine:
+        print("NotImplementedError")
         return NotImplementedError
     elif args.delete_temp:
         DeleteTempVenv()  # Delete the virtual environment
@@ -144,6 +146,7 @@ def main():
         print("python GradingPurposes.py --compressor")
         print("OR")
         print("python GradingPurposes.py --turbine")
+        print("OR")
         print("python GradingPurposes.py --delete-temp")
         sys.exit(1)
 

@@ -1,9 +1,10 @@
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
+
 from AnnulusDimension import annulus_dimensions
 from DesignConstants import (
-    inlet_stagnation_temperature,
     inlet_stagnation_pressure,
+    inlet_stagnation_temperature,
     rotational_speed,
 )
 from MeanVelocityTriangles import HubRadius
@@ -17,6 +18,8 @@ x, hub_radii = HubRadius(
 tip_radii = [annulus_dimensions["inlet_radii"][-1] for i in range(len(hub_radii))]
 mean_radii = (np.array(hub_radii) + np.array(tip_radii)) / 2
 
+from math import atan, cos, pi, tan
+
 # We will now vary the air angles from root to tip by taking into account the various distributions of the whirl velocity with radius.
 # For this design we will use the Free Vortex constraint
 # For the first stage, the design choice is limited due to the lack of inlet guide vanes (IGVs), resulting in no whirl component as
@@ -28,7 +31,6 @@ mean_radii = (np.array(hub_radii) + np.array(tip_radii)) / 2
 # The focus will then shift to designing the third stage, taking into account that the mean radius design assumed Lambda_mean = 0.50
 #
 from MeanVelocityTriangles import velocity_triangles_table
-from math import pi, cos, tan, atan
 
 c_p = 1.005e3  # J/K kg Specific heat at constant pressure
 gamma = 1.4
@@ -157,18 +159,3 @@ axs[4].plot(r_1_vals[3], alpha_1_vals[4], label=r"$\alpha_{1}$")
 axs[4].set_title("Stage 5 angles")
 axs[4].legend()
 plt.show()
-
-# def DegOfReaction(radius):
-# return 1 - (1/radius**2)*(1 - 0.5)
-
-# radius_hub_inlet=annulus_dimensions["inlet_radii"][0],
-# radius_hub_outlet=annulus_dimensions["outlet_radii"][0],
-# plt.plot(
-# np.linspace(annulus_dimensions["inlet_radii"][0],annulus_dimensions["inlet_radii"][-1]),
-# [DegOfReaction(r) for r in np.linspace(annulus_dimensions["inlet_radii"][0],annulus_dimensions["inlet_radii"][-1])],
-# label=r'$\Lambda$'
-# )
-# plt.title('Degree of Reaction')
-# plt.xlabel('Radius')
-# plt.ylabel(r'$\Lambda$')
-# plt.show()

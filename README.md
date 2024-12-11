@@ -11,14 +11,13 @@ Marc Martinez and Benjamin Tollison
 7. [x] Write the report
 
 ### Turbine to do
-1. [ ] Define the turbine annulus
-2. [ ] Use temperature drop, flow coefficient, and outlet kinectic energy
-3. [ ] consider 3D effects, blade shapes, and new outlet kinectic energy
-4. [ ] Satisfy the free vortex condition
-5. [ ] Internal losses, blade pitch, and cord
-6. [ ] Estimation of stage performance
-7. [ ] Design point preformance
-8. [ ] Complete the report by Thursday Night
+1. [x] Define the turbine annulus
+2. [ ] consider 3D effects, blade shapes, and new outlet kinectic energy
+3. [ ] Satisfy the free vortex condition
+4. [ ] Internal losses, blade pitch, and cord
+5. [ ] Estimation of stage performance
+6. [ ] Design point preformance
+7. [ ] Complete the report by Thursday Night
 # Table of Contents
 - [Setup](#setup)
 - [Compressor](#compressor)
@@ -27,6 +26,8 @@ Marc Martinez and Benjamin Tollison
   - [Mean Velocity Triangles](#mean-velocity-triangles)
   - [Variation of Air Angles Root to Tip](#variation-of-air-angles-root-to-tip)
 - [Turbine](#turbine)
+  - [Turbine Angles](#turbine-angles)
+  - [Turbine Annulus](#turbine-annulus)
 # Setup
 ## Grading Purposes Python script
 This script was created to automate the process of creating the temporary python environment and not have to constantly reference this document. All of the setup process is handled by the 'GradingPurposes.py' script that will prompt you in the terminal after you clone the git repository or download the files. Just run the following command to get started:
@@ -345,3 +346,83 @@ $$ \alpha_{2} = 0 \rightarrow V_2 = C_a$$
 
 Both methods for finding the angles do result in serve turning angles of the flow that can lead to flow seperation in manuevers. To not have to manufacture the more twisted airfoils, we selected that using the Free Vortex solution is the better option. 
 # Turbine
+
+The starting design constraints are the same as the compressor design but with the following added:
+$$
+\pi_{0T} = 2.16, \eta_T = 0.88, \textbf{P}_T = 1.7e^6 [W], \text{clearance} = 1\%
+$$
+
+## Turbine Angles
+This solution closely follows the example problem given and therefore present the equations used for the code and then the following results in a table. Additional assumptions that I made where that the $\Delta{T}_{stage} = 150[K]$, $\gamma = 1.333 \rightarrow c_p = 1148.86$,$\alpha_3 = 12^\circ$ and a $\phi = 0.8$. The equations to get the tables that define the turbine annulus are the following.
+$$
+\psi = \frac{2 c_p \Delta T_{0s}}{U^2}
+$$
+
+$$
+\begin{array}{ll}
+\tan \beta_3 = \frac{1}{2 \phi} \left( \frac{1}{2} \psi + 2 \Lambda \right) & \tan \alpha_3 = \tan \beta_3 - \frac{1}{\phi} \\
+\tan \beta_2 = \frac{1}{2 \phi} \left( \frac{1}{2} \psi - 2 \Lambda \right) & \tan \alpha_2 = \tan \beta_2 + \frac{1}{\phi}
+\end{array}
+$$
+With these 5 equations we can solve for the 5 unknowns.
+
+|           |       0 |        1 |        2 |
+|:----------|--------:|---------:|---------:|
+| $\psi$    | 2.8539  | nan      | nan      |
+| $\Lambda$ | 0.45657 | nan      | nan      |
+| $\alpha$  | 0       |  57.5239 |  12      |
+| $\beta$   | 0       |  17.8035 |  55.6382 |
+
+## Turbine Annulus
+With the velocity triangles defined we can move on to finding the annulus area/height/radius by following this derivation.
+
+$$
+C_{a2} = U \phi
+$$
+$$
+C_2 = \frac{C_{a2}}{\cos \alpha_2}
+$$
+$$
+T_{02} - T_2 = \frac{C_2^2}{2 c_p}
+$$
+I defined $\lambda_N = 6\%$
+$$
+T_2 - T'_2 = \lambda_N \frac{C_2^2}{2 c_p}
+$$
+$$
+\frac{p_{01}}{p_2} = \left( \frac{T_{01}}{T'_2} \right)^{\gamma / (\gamma - 1)} < \frac{p_{01}}{p_{cr}}
+$$
+
+$$
+\rho_2 = \frac{p_2}{R T_2}
+$$
+$$
+A_2 = \frac{m}{\rho_2 C_{a2}}
+$$
+To find the shape of the first and third stations you use the following.
+$$
+C_{a1} = C_1 = C_3 = \frac{C_{a3}}{\cos \alpha_3}
+$$
+
+$$
+T_1 = T_{01} - \frac{C_1^2}{2 c_p}
+$$
+
+$$
+\frac{p_1}{p_{01}} = \left( \frac{T_1}{T_{01}} \right)^{\gamma / (\gamma - 1)}
+$$
+$$
+A_1 = \frac{m}{\rho_1 C_{a1}}
+$$
+The station 3 can be solved the same as station one but with $T_{03} = T_{01} - \Delta{T}_s $, which produces the following tables.
+
+|                         |              0 |              1 |              2 |
+|:------------------------|---------------:|---------------:|---------------:|
+| stagnation_pressures    | 481294         | 481294         | 222821         |
+| pressures               | 428378         | 308118         | 112019         |
+| stagnation_temperatures |   1173         |   1173         |   1023         |
+| temperatures            |   1139.36      |   1049.33      |    987.842     |
+| densities               |      1.31004   |      1.02311   |      0.699526  |
+| area                    |      0.0222401 |      0.0284771 |      0.0416501 |
+| heights                 |      0.0273588 |      0.0350314 |      0.0512363 |
+| radius_ratio            |      1.23647   |      1.31317   |      1.4938    |

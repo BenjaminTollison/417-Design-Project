@@ -1,6 +1,10 @@
 import numpy as np
-from AnnulusDimension import annulus_dimensions
-from AnnulusDimension import total_rotor_velocity_hub, total_rotor_velocity_tip
+
+from AnnulusDimension import (
+    annulus_dimensions,
+    total_rotor_velocity_hub,
+    total_rotor_velocity_tip,
+)
 
 ### variables that change the entire solution
 stage_temperature_change = 150  # K
@@ -29,6 +33,13 @@ beta_2 = np.arctan(
     (1 / (2 * flow_coefficient)) * (0.5 * work_coefficient - 2 * degree_of_reaction)
 )
 alpha_2 = np.arctan(np.tan(beta_2) + 1 / flow_coefficient)
+
+velocity_angles_dict = {
+    r"$\psi$": [work_coefficient, np.nan, np.nan],
+    r"$\Lambda$": [degree_of_reaction, np.nan, np.nan],
+    r"$\alpha$": [0, np.degrees(alpha_2), np.degrees(alpha_3)],
+    r"$\beta$": [0, np.degrees(beta_2), np.degrees(beta_3)],
+}
 
 if __name__ == "__main__":
     print(np.degrees(alpha_2))
